@@ -115,6 +115,21 @@ fun main(args: Array<String>){
     println("===========내부함수==========")
     println(function1(0))
 
+    println("===========람다==========")
+    invokeFunction1 { println("콜백함수 실행") }
+
+    invokeFunction2(10, {
+        println("콜백함수 여러줄 실행")
+        "리턴 문자열"
+    })
+
+    for(i in 1..5 ){
+        Thread{
+            println("${i}번 스레드")
+        }.start()
+    }
+
+
 }
 fun function1(num1:Int):Int{
     fun function2(num2:Int):Int {
@@ -125,6 +140,20 @@ fun function1(num1:Int):Int{
     }
     return function2(num1) + 1
 }
+
+
+
+
+fun invokeFunction1(f: ()-> Unit){
+    f()
+}
+
+fun invokeFunction2(num:Int, f:()->String){
+    println("인자로 받은 숫자 : $num")
+    var returnValue = f()
+    println("$returnValue")
+}
+
 
 
 fun printNumbers(vararg numbers:Int){
