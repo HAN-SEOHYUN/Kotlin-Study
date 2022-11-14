@@ -65,6 +65,8 @@ fun main(args: Array<String>){
         println(number)
     }while(number % 2==0)
 
+
+    println("===========break==========")
     var arr = arrayOf("A","B","C","D","E")
     for(i in arr){
         println(i)
@@ -72,7 +74,63 @@ fun main(args: Array<String>){
             break
     }
 
+    //continue
+    println("===========continue==========")
+    val continueArr = arrayOf("A","B","C","D","E")
 
+    for(i in continueArr){
+        if (i=="C")
+            continue
+        println(i)
+    }
+
+    println("===========label==========")
+    label@ for(i in 0..9){
+        for(j in 0..9){
+            println("$i / $j")
+
+            if(i==3 && j==3){
+                break@label
+            }
+        }
+    }
+
+    println("===========try-catch==========")
+    val tcNumber = try{
+        "10A".toInt()
+    }catch (e:NumberFormatException){
+        println("예외발생")
+        0
+    }
+    println("tcNumber의 값은 $tcNumber 입니다")
+
+    println("===========unit - test==========")
+    fun printSum(){
+        println("hello world")
+    }
+
+    println("===========가변인자==========")
+    printNumbers(1,2,3,4)
+
+    println("===========내부함수==========")
+    println(function1(0))
+
+}
+fun function1(num1:Int):Int{
+    fun function2(num2:Int):Int {
+        fun function3(num3:Int):Int{
+            return num3+1
+        }
+        return function3(num2) +1
+    }
+    return function2(num1) + 1
+}
+
+
+fun printNumbers(vararg numbers:Int){
+    for(number in numbers){
+        println(number)
+    }
 }
 
 fun digit(num:Int) = when(num){
